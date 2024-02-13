@@ -15,7 +15,8 @@ typedef SongData = {
 }
 
 typedef NoteData = {
-    var sectionNotes:Array<Dynamic>;
+    var time:Float;
+    var duration:Float;
 }
 
 class Song
