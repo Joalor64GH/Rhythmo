@@ -1,6 +1,8 @@
 package;
 
 import flixel.sound.FlxSound;
+
+import flixel.FlxSprite;
 import flixel.text.FlxText;
 import flixel.FlxState;
 import flixel.FlxG;
@@ -40,7 +42,7 @@ class PlayState extends BeatState
     {
         super.update(elapsed);
 
-        if (currentNoteIndex < notes.length && music.position >= notes[currentNoteIndex].time)
+        if (currentNoteIndex < notes.length && music.time >= notes[currentNoteIndex].time)
         {
             notes[currentNoteIndex].trigger();
             currentNoteIndex++;
