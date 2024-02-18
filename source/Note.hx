@@ -6,7 +6,7 @@ import flixel.util.FlxColor;
 
 class Note extends FlxSprite
 {
-    public static var time:Int;
+    public var time:Int;
 
     public function new(time:Int, yPos:Float)
     {
