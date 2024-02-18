@@ -2,33 +2,25 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
-
-import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.util.FlxColor;
 
 class Note extends FlxSprite
 {
-    public function new(x:Float = 0, y:Float = 0)
+    var time:Int;
+
+    public function new(time:Int, yPos:Float)
     {
-        super(x, y);
+        super(0, yPos);
+        this.time = time;
 
-        frames = Paths.getSparrowAtlas('arrows');
+        makeGraphic(20, 20, FlxColor.fromRGB(FlxG.random.int(0, 255), FlxG.random.int(0, 255), FlxG.random.int(0, 255)));
+        visible = false;
+    }
 
-        animation.addByPrefix('downI', 'downIdle');
-        animation.addByPrefix('downP', 'downPress');
-        animation.addByPrefix('downR', 'down');
-
-        animation.addByPrefix('leftI', 'leftIdle');
-        animation.addByPrefix('leftP', 'leftPress');
-        animation.addByPrefix('leftR', 'left');
-
-        animation.addByPrefix('rightI', 'rightIdle');
-        animation.addByPrefix('rightP', 'rightPress');
-        animation.addByPrefix('rightR', 'right');
-
-        animation.addByPrefix('upI', 'upIdle');
-        animation.addByPrefix('upP', 'upPress');
-        animation.addByPrefix('upR', 'up');
-
-        setGraphicSize(width * 0.7);
+    public function trigger():Void
+    {
+        FlxG.camera.flash(FlxColor.WHITE, 0.5);
+        FlxG.camera.shake(0.01, 0.2);
+        visible = true;
     }
 }
