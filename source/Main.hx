@@ -64,7 +64,7 @@ class Main extends openfl.display.Sprite
 			Sys.println(errMsg);
 			Sys.println("Crash dump saved in " + Path.normalize(path));
 
-			Application.current.window.alert(errMsg, "Error!");
+			lime.app.Application.current.window.alert(errMsg, "Error!");
 			Sys.exit(1);
 		});
 		#end
