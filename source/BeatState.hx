@@ -1,9 +1,5 @@
 package;
 
-import flixel.FlxG;
-import flixel.FlxState;
-import Conductor;
-
 class BeatState extends FlxState
 {
     private var curBeat:Int = 0;

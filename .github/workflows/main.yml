@@ -30,10 +30,7 @@ jobs:
             cache-build-windows
       - name: Install Haxelib
         run: |
-          haxelib setup C:/haxelib
-          haxelib install hxcpp > /dev/null --quiet
-          haxelib install hmm --quiet
-          haxelib run hmm install
+          haxe -cp ./compileData -D analyzer-optimize -main Libraries --interp
         shell: cmd
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION

@@ -1,37 +1,55 @@
 package;
 
-import flixel.FlxG;
-
-import haxe.Json;
 import openfl.utils.Assets;
+import Section.SectionArray;
 
 using StringTools;
 
 typedef SongData = {
     var song:String;
-    var bpm:Float;
+    var notes:Array<SectionArray>;
+    var bpm:Int;
+    var sections:Int;
+    var sectionLengths:Array<Dynamic>;
+    var needsVoices:Bool;
     var speed:Float;
-    var notes:Array<NoteData>;
-}
 
-typedef NoteData = {
-    var time:Float;
-    var duration:Float;
+    var player1:String;
+    var player2:String;
 }
 
 class Song
 {
-    public static function loadSong(jsonInput:String, ?folder:String):SongData
-        return parseJson(Paths.json('data/' + folder.toLowerCase() + '/' + jsonInput.toLowerCase()).trim());
-    
-    public static function parseJson(path:String):SongData
+    public var song:String;
+    public var notes:Array<SectionArray>;
+    public var bpm:Int;
+    public var sections:Int;
+    public var sectionLengths:Array<Dynamic> = [];
+    public var needsVoices:Bool = true;
+    public var speed:Float = 1;
+
+    public var player1:String = 'player';
+    public var player2:String = 'opponent';
+
+    public function new(song, notes, bpm, sections)
     {
-        var rawJson:String = null;
+        this.song = song;
+        this.notes = notes;
+        this.bpm = bpm;
+        this.sections = sections;
 
-        if (Assets.exists(rawJson))
-            rawJson = Assets.getText(path);
+        for (i in 0...notes.length)
+            this.sectionLengths.push(notes[i]);
+    }
 
-        var daSwag:SongData = Json.parse(rawJson).song;
-        return daSwag;
+    public static function loadFromJSON(file:String, ?folder:String):SongData
+    {
+        var rawJson = Assets.getText(Paths.json(folder.toLowerCase() + '/' + file.toLowerCase())).trim();
+
+        while (!rawJson.endsWith("}"))
+            rawJson = rawJson.substr(0, rawJson.length - 1);
+
+        var swagger:SongData = cast Json.parse(rawJson).song;
+        return swagger;
     }
 }
