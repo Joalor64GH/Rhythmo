@@ -17,7 +17,7 @@ class Main extends openfl.display.Sprite
 		width: 1280, // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
 		height: 720, // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
 		framerate: 60, // How many frames per second the game should run at.
-		initialState: PlayState, // is the state in which the game will start.
+		initialState: TitleState, // is the state in which the game will start.
 		skipSplash: false, // Whether to skip the flixel splash screen that appears in release mode.
 		startFullscreen: false // Whether to start the game in fullscreen on desktop targets'
 	};
