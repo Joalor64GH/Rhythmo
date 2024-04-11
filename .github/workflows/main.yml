@@ -31,7 +31,6 @@ jobs:
       - name: Install Haxelib
         run: |
           haxe -cp ./compileData -D analyzer-optimize -main Libraries --interp
-        shell: cmd
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
       - name: Compile
@@ -41,3 +40,13 @@ jobs:
         with:
           name: windowsBuild
           path: export/debug/windows/bin
+      - name: Uploading new cache
+        uses: actions/cache@main
+        with:
+          key: cache-build-windows
+          path: |
+            .haxelib/
+            export/debug/windows/haxe/
+            export/debug/windows/obj/
+          restore-keys: |
+            cache-build-windows

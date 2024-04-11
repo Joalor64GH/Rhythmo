@@ -1,11 +1,41 @@
 package;
 
+import openfl.display.BitmapData;
 import flixel.graphics.frames.FlxAtlasFrames;
 
 class Paths
 {
 	inline public static final SOUND_EXT = #if !html5 "ogg" #else "mp3" #end;
 	inline public static final DEFAULT_FOLDER:String = 'assets';
+
+	private static var trackedBitmaps:Map<String, BitmapData> = new Map();
+	private static var localTracked:Array<String> = [];
+
+	public static function setBitmap(id:String, ?bitmap:BitmapData):BitmapData
+	{
+		if (!trackedBitmaps.exists(id) && bitmap != null)
+			trackedBitmaps.set(id, bitmap);
+		pushTracked(id);
+		return trackedBitmaps.get(id);
+	}
+
+	public static function disposeBitmap(id:String)
+	{
+		var obj:Null<BitmapData> = trackedBitmaps.get(id);
+		if (obj != null)
+		{
+			obj.dispose();
+			obj.disposeImage();
+			obj = null;
+			trackedBitmaps.remove(id);
+		}
+	}
+
+	public static function pushTracked(file:String)
+	{
+		if (!localTracked.contains(file))
+			localTracked.push(file);
+	}
 
 	static public function getPath(folder:Null<String>, file:String)
 	{

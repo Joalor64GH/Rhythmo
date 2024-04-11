@@ -30,7 +30,7 @@ class PauseSubState extends FlxSubState
         else if (FlxG.keys.justPressed.ESCAPE)
         {
             close();
-            FlxG.switchState(new SongSelectState());
+            FlxG.switchState(SongSelectState.new);
         }
         else if (FlxG.keys.justPressed.ENTER)
             close();
