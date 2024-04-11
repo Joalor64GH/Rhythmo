@@ -31,6 +31,6 @@ class HUD extends FlxSpriteGroup
 
     public function updateText()
     {
-        scoreTxt.text = "Score: ${PlayState.songScore} // Misses: ${PlayState.songMisses}";
+        scoreTxt.text = 'Score: ${PlayState.songScore} // Misses: ${PlayState.songMisses}';
     }
 }
