@@ -253,7 +253,7 @@ class PlayState extends BeatState
 		notes = new FlxTypedGroup<Note>();
 		add(notes);
 
-		var noteData:Array<SwagSection>;
+		var noteData:Array<SectionArray>;
 
 		noteData = songData.notes;
 
