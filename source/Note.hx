@@ -40,7 +40,7 @@ class Note extends FlxSprite
 		animation.addByPrefix('blueScroll', 'blue alone');
 		animation.addByPrefix('purpleScroll', 'purple alone');
 
-		animation.addByPrefix('purpleholdend', 'pruple tail');
+		animation.addByPrefix('purpleholdend', 'purple tail');
 		animation.addByPrefix('greenholdend', 'green tail');
 		animation.addByPrefix('redholdend', 'red tail');
 		animation.addByPrefix('blueholdend', 'blue tail');

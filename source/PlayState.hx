@@ -178,7 +178,6 @@ class PlayState extends BeatState
 							prepare.destroy();
 						}
 					});
-					FlxG.sound.play('assets/sounds/intro3' + ".ogg", 0.6);
 				case 1:
 					var ready:FlxSprite = new FlxSprite().loadGraphic(Paths.image('two'));
 					ready.scrollFactor.set();
@@ -192,7 +191,6 @@ class PlayState extends BeatState
 							ready.destroy();
 						}
 					});
-					FlxG.sound.play('assets/sounds/intro2' + ".ogg", 0.6);
 				case 2:
 					var set:FlxSprite = new FlxSprite().loadGraphic(Paths.image('one'));
 					set.scrollFactor.set();
@@ -206,7 +204,6 @@ class PlayState extends BeatState
 							set.destroy();
 						}
 					});
-					FlxG.sound.play('assets/sounds/intro1' + ".ogg", 0.6);
 				case 3:
 					var go:FlxSprite = new FlxSprite().loadGraphic(Paths.image('go'));
 					go.scrollFactor.set();
@@ -220,7 +217,6 @@ class PlayState extends BeatState
 							go.destroy();
 						}
 					});
-					FlxG.sound.play('assets/sounds/introGo' + ".ogg", 0.6);
 			}
 
 			swagCounter++;

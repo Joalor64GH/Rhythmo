@@ -11,7 +11,7 @@ class Player extends Character
         animation.addByPrefix('singUP', 'Up', 24);
         animation.addByPrefix('singDOWN', 'Down', 24);
         animation.addByPrefix('singLEFT', 'Left', 24);
-        animation.addByPrefix('singRIGHT', 'RIGHT', 24);
+        animation.addByPrefix('singRIGHT', 'Right', 24);
 
         playAnim('idle');
 
