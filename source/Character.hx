@@ -55,18 +55,6 @@ class Character extends FlxSprite
 
                 flipX = true;
 		}
-
-		if (isPlayer)
-		{
-			flipX = !flipX;
-
-			if (!curCharacter.startsWith('player'))
-			{
-				var oldRight = animation.getByName('singRIGHT').frames;
-				animation.getByName('singRIGHT').frames = animation.getByName('singLEFT').frames;
-				animation.getByName('singLEFT').frames = oldRight;
-			}
-		}
 	}
 
 	override function update(elapsed:Float)

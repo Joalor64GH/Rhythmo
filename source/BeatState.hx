@@ -4,9 +4,6 @@ import Conductor.BPMChangeEvent;
 
 class BeatState extends FlxState
 {
-	private var lastBeat:Float = 0;
-	private var lastStep:Float = 0;
-
 	private var curStep:Int = 0;
 	private var curBeat:Int = 0;
 
@@ -39,7 +36,7 @@ class BeatState extends FlxState
 			stepTime: 0,
 			songTime: 0,
 			bpm: 0
-		}
+		};
 
 		for (i in 0...Conductor.bpmChangeMap.length)
 			if (Conductor.songPosition >= Conductor.bpmChangeMap[i].songTime)
