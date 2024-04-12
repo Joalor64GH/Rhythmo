@@ -1,8 +1,9 @@
 package;
 
 import Conductor.BPMChangeEvent;
+import flixel.addons.ui.FlxUIState;
 
-class BeatState extends FlxState
+class BeatState extends FlxUIState
 {
 	private var curStep:Int = 0;
 	private var curBeat:Int = 0;

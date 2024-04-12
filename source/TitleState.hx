@@ -36,7 +36,7 @@ class TitleState extends BeatState
                 FlxTween.angle(logo, logo.angle, 4, 4, {ease: FlxEase.quartInOut});
             if (logo.angle == 4)
                 FlxTween.angle(logo, logo.angle, -4, 4, {ease: FlxEase.quartInOut});
-        });
+        }, 0);
     }
 
     override function update(elapsed:Float)
