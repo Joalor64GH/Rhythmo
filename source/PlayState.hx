@@ -1,6 +1,6 @@
 package;
 
-import Section.SwagSection;
+import Section.SectionArray;
 import Song.SongData;
 
 import flixel.addons.display.FlxGridOverlay;
@@ -19,8 +19,8 @@ class PlayState extends BeatState
 
 	private var vocals:FlxSound;
 
-	private var opponent:Opponent;
-	private var player:Player;
+	private var opponent:Character;
+	private var player:Character;
 
 	private var notes:FlxTypedGroup<Note>;
 	private var unspawnNotes:Array<Note> = [];
@@ -79,12 +79,12 @@ class PlayState extends BeatState
 		bg.scrollFactor.set(0.5, 0.5);
 		add(bg);
 
-		opponent = new Opponent(100, 100);
+		opponent = new Character(100, 100, SONG.player2);
 
 		var camPos:FlxPoint = new FlxPoint(opponent.getGraphicMidpoint().x, opponent.getGraphicMidpoint().y);
 		camPos.x += 400;
 
-		player = new Player(770, 450);
+		player = new Character(770, 450, SONG.player1);
 
 		add(opponent);
 		add(player);
@@ -138,12 +138,9 @@ class PlayState extends BeatState
 
 	function startCountdown():Void
 	{
-		inCutscene = false;
-
 		generateStaticArrows(0);
 		generateStaticArrows(1);
 
-		talking = false;
 		startedCountdown = true;
 		Conductor.songPosition = 0;
 		Conductor.songPosition -= Conductor.crochet * 5;
@@ -567,7 +564,6 @@ class PlayState extends BeatState
 					{
 						if (daNote.tooLate || !daNote.wasGoodHit)
 						{
-							health -= 0.0475;
 							vocals.volume = 0;
 						}
 
