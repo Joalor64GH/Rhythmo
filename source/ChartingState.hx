@@ -189,7 +189,7 @@ class ChartingState extends BeatState
 		stepperBPM.value = Conductor.bpm;
 		stepperBPM.name = 'song_bpm';
 
-		var characters:Array<String> = getText('assets/data/characterList.txt');
+		var characters:Array<String> = getTheText('assets/data/characterList.txt');
 
 		var player1DropDown = new FlxUIDropDownMenu(10, 100, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
 		{
@@ -230,9 +230,9 @@ class ChartingState extends BeatState
 	var check_changeBPM:FlxUICheckBox;
 	var stepperSectionBPM:FlxUINumericStepper;
 
-	function getText(path:String):Array<String>
+	function getTheText(path:String):Array<String>
 	{
-		return Assets.exists(path) ? [for (i in Assets.getText(path).trim().split('\n')) i.trim()] : [];
+		return openfl.Assets.exists(path) ? [for (i in openfl.Assets.getText(path).trim().split('\n')) i.trim()] : [];
 	}
 
 	function addSectionUI():Void

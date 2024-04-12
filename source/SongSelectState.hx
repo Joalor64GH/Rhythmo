@@ -63,7 +63,7 @@ class SongSelectState extends BeatState
         if (FlxG.keys.justPressed.ENTER)
         {
             var poop:String = Highscore.formatSong(songs[curSelected].toLowerCase());
-            PlayState.SONG = Song.loadFromJSON(poop, songs[curSelected].toLowerCase());
+            PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].toLowerCase());
             FlxG.switchState(new PlayState());
         }
         
