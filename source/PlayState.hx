@@ -19,8 +19,8 @@ class PlayState extends BeatState
 
 	private var vocals:FlxSound;
 
-	private var opponent:Character;
-	private var player:Character;
+	private var opponent:Opponent;
+	private var player:Player;
 
 	private var notes:FlxTypedGroup<Note>;
 	private var unspawnNotes:Array<Note> = [];
@@ -79,12 +79,12 @@ class PlayState extends BeatState
 		bg.scrollFactor.set(0.5, 0.5);
 		add(bg);
 
-		opponent = new Character(100, 100, SONG.player2);
+		opponent = new Opponent(100, 100);
 
 		var camPos:FlxPoint = new FlxPoint(opponent.getGraphicMidpoint().x, opponent.getGraphicMidpoint().y);
 		camPos.x += 400;
 
-		player = new Character(770, 450, SONG.player1);
+		player = new Player(770, 450);
 
 		add(opponent);
 		add(player);

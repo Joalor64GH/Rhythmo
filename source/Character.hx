@@ -18,43 +18,6 @@ class Character extends FlxSprite
 		this.isPlayer = isPlayer;
 
 		antialiasing = true;
-
-		switch (curCharacter)
-		{
-			case 'opponent':
-				frames = Paths.getSparrowAtlas('opponent');
-                animation.addByPrefix('idle', 'Idle', 24);
-                animation.addByPrefix('singUP', 'Up', 24);
-                animation.addByPrefix('singDOWN', 'Down', 24);
-                animation.addByPrefix('singLEFT', 'Left', 24);
-                animation.addByPrefix('singRIGHT', 'RIGHT', 24);
-
-                playAnim('idle');
-
-                addOffset('idle', 0, -350);
-                addOffset('singUP', 8, -334);
-                addOffset('singDOWN', -17, -375);
-                addOffset('singLEFT', 22, -353);
-                addOffset('singRIGHT', 50, -348);
-
-			case 'player':
-				frames = Paths.getSparrowAtlas('player');
-                animation.addByPrefix('idle', 'Idle', 24);
-                animation.addByPrefix('singUP', 'Up', 24);
-                animation.addByPrefix('singDOWN', 'Down', 24);
-                animation.addByPrefix('singLEFT', 'Left', 24);
-                animation.addByPrefix('singRIGHT', 'RIGHT', 24);
-
-                playAnim('idle');
-
-                addOffset('idle', 0, -10);
-                addOffset('singUP', -45, 11);
-                addOffset('singDOWN', -48, -31);
-                addOffset('singLEFT', 33, -6);
-                addOffset('singRIGHT', -61, -14);
-
-                flipX = true;
-		}
 	}
 
 	override function update(elapsed:Float)
@@ -68,6 +31,7 @@ class Character extends FlxSprite
 
 			if (curCharacter == 'opponent')
 				aVar = 6.1;
+			
 			if (holdTimer >= Conductor.stepCrochet * aVar * 0.001)
 			{
 				playAnim('idle');
@@ -85,8 +49,6 @@ class Character extends FlxSprite
 		var daOffset = animOffsets.get(animation.curAnim.name);
 		if (animOffsets.exists(animation.curAnim.name))
 			offset.set(daOffset[0], daOffset[1]);
-		else
-			offset.set(0, 0);
 	}
 
 	public function addOffset(name:String, x:Float = 0, y:Float = 0)
