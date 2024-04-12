@@ -1,6 +1,6 @@
 package;
 
-class SongSelectState extends BeatState
+class SongSelectState extends FlxState
 {
     var grpSongs:FlxTypedGroup<FlxText>;
     var songs:Array<String> = ["Bopeebo", "Bopeebo", "Bopeebo"]; // only testing for now
