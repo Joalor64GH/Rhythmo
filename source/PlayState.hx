@@ -46,12 +46,13 @@ class PlayState extends BeatState
 	private var camHUD:FlxCamera;
 	private var camGame:FlxCamera;
 
-	public static var songScore:Int = 0;
-	public static var songMisses:Int = 0;
+	private var songScore:Int = 0;
+	private var songMisses:Int = 0;
 
 	var defaultCamZoom:Float = 1.05;
 
-	var ui:HUD;
+	private var scoreTxt:FlxText;
+	private var timeBar:Bar;
 
 	override public function create()
 	{
@@ -121,11 +122,20 @@ class PlayState extends BeatState
 
 		FlxG.fixedTimestep = false;
 
-		ui = new HUD();
-		add(ui);
+		scoreTxt = new FlxText(0, (FlxG.height * 0.89) + 36, FlxG.height, "Score: 0 // Misses: 0", 20);
+		scoreTxt.setFormat(Paths.font('vcr.ttf'), 48, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt.scrollFactor.set();
+		scoreTxt.screenCenter(X);
+		add(scoreTxt);
+
+		timeBar = new Bar(0, 0, FlxG.width, 10, FlxColor.WHITE, FlxColor.fromRGB(30, 144, 255));
+		timeBar.screenCenter(X);
+		timeBar.y = FlxG.height - 10;
+		add(timeBar);
 
 		strumLineNotes.cameras = [camHUD];
-		ui.cameras = [camHUD];
+		scoreTxt.cameras = [camHUD];
+		timeBar.cameras = [camHUD];
 
 		startingSong = true;
 		startCountdown();
@@ -429,7 +439,7 @@ class PlayState extends BeatState
 		perfectMode = false;
 		#end
 
-		ui.updateText();
+		scoreTxt.text = 'Score: $songScore // Misses: $songMisses';
 
 		super.update(elapsed);
 
@@ -460,6 +470,8 @@ class PlayState extends BeatState
 
 			if (!paused)
 			{
+				timeBar.value = (Conductor.songPosition / FlxG.sound.music.length);
+
 				songTime += FlxG.game.ticks - previousFrameTime;
 				previousFrameTime = FlxG.game.ticks;
 
@@ -563,9 +575,7 @@ class PlayState extends BeatState
 					else
 					{
 						if (daNote.tooLate || !daNote.wasGoodHit)
-						{
 							vocals.volume = 0;
-						}
 
 						daNote.active = false;
 						daNote.visible = false;
@@ -591,6 +601,7 @@ class PlayState extends BeatState
 		canPause = false;
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
+		trace("song finished");
 		Highscore.saveScore(SONG.song, songScore);
 		FlxG.switchState(new SongSelectState());
 	}
@@ -836,7 +847,7 @@ class PlayState extends BeatState
 
 		if (player.holdTimer > Conductor.stepCrochet * 4 * 0.001 && !up && !down && !right && !left)
 		{
-			if (player.animation.curAnim.name.startsWith('sing') && !player.animation.curAnim.name.endsWith('miss'))
+			if (player.animation.curAnim.name.startsWith('sing'))
 				player.playAnim('idle');
 		}
 
