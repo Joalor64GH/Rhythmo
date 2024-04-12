@@ -38,8 +38,8 @@ class TitleState extends BeatState
 
     override function update(elapsed:Float)
     {
-        // if (FlxG.keys.justPressed.ENTER)
-        //    FlxG.switchState(new SongSelectState());
+        if (FlxG.keys.justPressed.ENTER)
+            FlxG.switchState(new SongSelectState());
 
         super.update(elapsed);
     }

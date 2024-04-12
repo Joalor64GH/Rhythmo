@@ -25,7 +25,7 @@ class HUD extends FlxSpriteGroup
 
     override public function update(elapsed:Float)
     {
-        timeBar.value = (FlxG.sound.music.time / FlxG.sound.music.length);
+        timeBar.value = (Conductor.songPosition / FlxG.sound.music.length);
         super.update(elapsed);
     }
 

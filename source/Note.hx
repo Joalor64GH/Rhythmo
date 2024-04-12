@@ -29,7 +29,9 @@ class Note extends FlxSprite
 		isSustainNote = sustainNote;
 
 		x += 50;
+		y -= 2000;
 		this.strumTime = strumTime;
+
 		this.noteData = noteData;
 
 		frames = Paths.getSparrowAtlas('NOTE_assets');
@@ -50,6 +52,7 @@ class Note extends FlxSprite
 
 		setGraphicSize(Std.int(width * 0.7));
 		updateHitbox();
+		antialiasing = true;
 
 		switch (noteData)
 		{
@@ -94,18 +97,18 @@ class Note extends FlxSprite
 			{
 				switch (prevNote.noteData)
 				{
+					case 0:
+						prevNote.animation.play('purplehold');
+					case 1:
+						prevNote.animation.play('bluehold');
 					case 2:
 						prevNote.animation.play('greenhold');
 					case 3:
 						prevNote.animation.play('redhold');
-					case 1:
-						prevNote.animation.play('bluehold');
-					case 0:
-						prevNote.animation.play('purplehold');
 				}
 
-				prevNote.offset.y = -19;
-				prevNote.scale.y *= (2.25 * states.games.rhythmo.PlayState.SONG.speed);
+				prevNote.scale.y *= Conductor.stepCrochet / 100 * 1.5 * PlayState.SONG.speed;
+				prevNote.updateHitbox();
 			}
 		}
 	}
@@ -116,9 +119,11 @@ class Note extends FlxSprite
 
 		if (mustPress)
 		{
-			canBeHit = (strumTime > Conductor.songPosition - Conductor.safeZoneOffset 
-				&& strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * 0.5)) ? 
-					true : false;
+			if (strumTime > Conductor.songPosition - Conductor.safeZoneOffset
+				&& strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * 0.5))
+				canBeHit = true;
+			else
+				canBeHit = false;
 
 			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset)
 				tooLate = true;

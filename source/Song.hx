@@ -49,7 +49,12 @@ class Song
         while (!rawJson.endsWith("}"))
             rawJson = rawJson.substr(0, rawJson.length - 1);
 
-        var swagger:SongData = cast Json.parse(rawJson).song;
-        return swagger;
+        return parseJSONshit(rawJson);
+    }
+
+    public static function parseJSONshit(rawJson:String):SongData
+    {
+        var swagShit:SongData = cast Json.parse(rawJson).song;
+        return swagShit;
     }
 }
