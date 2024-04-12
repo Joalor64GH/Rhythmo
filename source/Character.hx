@@ -3,7 +3,6 @@ package;
 class Character extends FlxSprite
 {
 	public var animOffsets:Map<String, Array<Dynamic>>;
-	public var debugMode:Bool = false;
 
 	public var isPlayer:Bool = false;
 	public var curCharacter:String = 'player';
@@ -75,9 +74,7 @@ class Character extends FlxSprite
 		if (!curCharacter.startsWith('player'))
 		{
 			if (animation.curAnim.name.startsWith('sing'))
-			{
 				holdTimer += elapsed;
-			}
 
 			var aVar:Float = 4;
 
@@ -99,9 +96,7 @@ class Character extends FlxSprite
 
 		var daOffset = animOffsets.get(animation.curAnim.name);
 		if (animOffsets.exists(animation.curAnim.name))
-		{
 			offset.set(daOffset[0], daOffset[1]);
-		}
 		else
 			offset.set(0, 0);
 	}
