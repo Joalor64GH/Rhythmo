@@ -23,6 +23,9 @@ class TitleState extends BeatState
         FlxTween.tween(logoBck, {y: logoBck.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
         FlxTween.tween(logo, {y: logoBck.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG, startDelay: 0.1});
 
+        logo.angle = -4;
+        logoBck.angle = -4;
+
         new FlxTimer().start(0.01, (timer) ->
         {
             if (logoBck.angle == -4)
