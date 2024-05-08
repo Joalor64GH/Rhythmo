@@ -11,12 +11,19 @@ class Note extends FlxSprite
 	public var wasGoodHit:Bool = false;
 	public var prevNote:Note;
 
+	private var willMiss:Bool = false;
+
+	public var altNote:Bool = false;
+	public var invisNote:Bool = false;
+
 	public var sustainLength:Float = 0;
 	public var isSustainNote:Bool = false;
 
 	public var noteScore:Float = 1;
 
 	public static var swagWidth:Float = 160 * 0.7;
+
+	public static var arrowColors:Array<Float> = [1, 1, 1, 1];
 
 	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false)
 	{
@@ -119,14 +126,24 @@ class Note extends FlxSprite
 
 		if (mustPress)
 		{
-			if (strumTime > Conductor.songPosition - Conductor.safeZoneOffset
-				&& strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * 0.5))
-				canBeHit = true;
-			else
-				canBeHit = false;
-
-			if (strumTime < Conductor.songPosition - Conductor.safeZoneOffset)
+			if (willMiss && !wasGoodHit)
+			{
 				tooLate = true;
+				canBeHit = false;
+			}
+			else
+			{
+				if (strumTime > Conductor.songPosition - Conductor.safeZoneOffset)
+				{
+					if (strumTime < Conductor.songPosition + (Conductor.safeZoneOffset * 0.5))
+						canBeHit = true;
+				}
+				else
+				{
+					canBeHit = true;
+					willMiss = true;
+				}
+			}
 		}
 		else
 		{
